@@ -1,2 +1,49 @@
 # gDS
-A Python global data store
+
+(Python) Global Data Store (gDS) - An lightweight data store (for building test platforms in Python among other things)
+
+gDS may not be for you:
+
+    -- If you need the ACID qualities of a DBMS gDS is not for you.
+    -- If you need more space than a memory-resident data store can handle gDS is not for you.
+    -- If you need SQL or don't want to use the notation required to access the data gDS is not for you.
+    -- If you would rather not be concerned about data-locking issues (there are work-around discussions below) gDS is not for you.
+    
+(For anyone left..) If you need a core, controlling data store so you can multi-process in Python and consume multiple host CPUs to 
+get a "large" job done gDS may be for you. gDS was developed to help manage an end-to-end test tool that featured hundreds of 
+independent activities (processes and threads) running against a VMware installation with hundreds of bare-metal hosts and thousands 
+of VMs. gDS was used to keep all the run-time activities heading in the same direction.
+
+gDS uses Python shared-memory "list" and "dict" objects (created by the native "multiprocessing" library) to synthesize global 
+run-time tables. An easy-to-use naming convention and notation (once you get used to it) makes it very plain what data is being 
+manipulated and the notation remains consistent whether multi-processing, multi-threading or both. Any change in the data by one 
+process/thread is instantly reflected in all cooperating processes/threads. The tables are defined by a data-definition file which 
+is compiled by the "gDSCompiler" into a Python file, and then consumed by the code using the gDS.
+
+Example files
+=============
+
+    animalFarm_01 - This example is brutally simple. It does *NO* multi-processing or multi-threading. It sets up a few counties / 
+        farms / animals and prints them out with the compiled debug/dump routines.
+
+    animalFarm_02 - This example is currently under construction. Its goal is to be descriptive and non-trivial (multi-processing 
+        and multi-threading). One large goal is to expose strategies for handling concurrent access.
+
+animalFarm_01
+=============
+
+To run the sample executable file "animalFarm_01":
+
+    -- The data-definition file "animalFarm_01.dd" must be compiled (once) into "animalFarm_01.py" by the included compiler:
+        -- Edit the first line of the "gDSCompiler" file to cite the installed version of python3
+        -- Execute the compiler on the "animalFarm_01.dd" file:
+        
+            ./gDSCompiler animalFarm_01
+        
+    -- After the above compile, the example program can be run:
+        -- Edit the first line of the example file ("animalFarm_01") to cite the installed version of python 3 to run
+        -- Execute the example file (see the file - it performs some very simple operations):
+        
+            ./animalFarm_01
+        
+    
