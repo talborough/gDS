@@ -4,10 +4,10 @@
 
 gDS may not be for you:
 
-    -- If you need the ACID qualities of a DBMS gDS is not for you.
-    -- If you need more space than a memory-resident data store can handle gDS is not for you.
-    -- If you need SQL or don't want to use the notation required to access the data gDS is not for you.
-    -- If you would rather not be concerned about data-locking issues (there are work-around discussions below) gDS is not for you.
+    - If you need the ACID qualities of a DBMS gDS is not for you.
+    - If you need more space than a memory-resident data store can handle gDS is not for you.
+    - If you need SQL or don't want to use the notation required to access the data, gDS is not for you.
+    - If you would rather not be concerned about data-locking issues (there are work-around discussions below) gDS is not for you.
     
 (For anyone left..) If you need a core, controlling data store so you can multi-process in Python and consume multiple host CPUs to 
 get a "large" job done gDS may be for you. gDS was developed to help manage an end-to-end test tool that featured hundreds of 
@@ -24,7 +24,7 @@ Example files
 =============
 
     animalFarm_01 - This example is brutally simple. It does *NO* multi-processing or multi-threading. It sets up a few counties / 
-        farms / animals and prints them out with the compiled debug/dump routines.
+        farms / animals and dumps them out with the compiled debug/dump routines.
 
     animalFarm_02 - This example is currently under construction. Its goal is to be descriptive and non-trivial (multi-processing 
         and multi-threading). One large goal is to expose strategies for handling concurrent access.
