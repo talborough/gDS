@@ -1,0 +1,90 @@
+#!/usr/bin/python3.8
+
+from past.builtins import execfile
+
+# Consume file animalFarm_01.py (take a look at it!)
+execfile ('animalFarm_01.py')
+
+#
+# Called by code in animalFartm.py for table concurrency control (dummied out because we don't need it here and now)
+#
+def MasterLock(x):
+    pass
+#
+# Concurrency control (the "RowStatus" column) - NOTE - since this is a single-threaded example the "RowStatus"
+# column is not used. 
+#
+
+#
+# Create the counties and farms
+#
+countyIndexA = addRow_gCounty(None)
+gCounty_Name[countyIndexA] = "County A"
+gCounty_Name2Index["County A"] = countyIndexA
+
+countyIndexB = addRow_gCounty(None)
+gCounty_Name[countyIndexB] = "County B"
+gCounty_Name2Index["County B"] = countyIndexB
+
+farmIndex1 = addRow_gFarm(None)
+gFarm_Name[farmIndex1] = "Farm A"
+gFarm_gCounty_Index[farmIndex1] = countyIndexA
+
+farmIndex2 = addRow_gFarm(None)
+gFarm_Name[farmIndex2] = "Farm B"
+gFarm_gCounty_Index[farmIndex2] = countyIndexB
+
+#
+# Add some animals (3 cows and 6 chickens)
+#
+ThreadName = "Tom's"
+animalIndex = addRow_gAnimal(None)
+gAnimal_Type[animalIndex] = "Cow"
+gAnimal_Name[animalIndex] = "Bessie"
+gAnimal_gFarm_Index[animalIndex] = farmIndex1
+
+animalIndex = addRow_gAnimal(None)
+gAnimal_Type[animalIndex] = "Cow"
+gAnimal_Name[animalIndex] = "Agnes"
+gAnimal_gFarm_Index[animalIndex] = farmIndex1
+
+animalIndex = addRow_gAnimal(None)
+gAnimal_Type[animalIndex] = "Cow"
+gAnimal_Name[animalIndex] = "Mable"
+gAnimal_gFarm_Index[animalIndex] = farmIndex2
+
+# 2 chickens on farm #1
+for i in range (0, 2):
+    animalIndex = addRow_gAnimal(None)
+    gAnimal_Type[animalIndex] = "Chicken"
+    gAnimal_Name[animalIndex] = f"Chicken #{i + 1}"
+    gAnimal_gFarm_Index[animalIndex] = farmIndex1
+    
+# 4 chickens on farm #2
+for i in range (0, 4):
+    animalIndex = addRow_gAnimal(None)
+    gAnimal_Type[animalIndex] = "Chicken"
+    gAnimal_Name[animalIndex] = f"Chicken #{i + 1}"
+    gAnimal_gFarm_Index[animalIndex] = farmIndex2
+
+# Dump all the tables
+dumpTable_gCounty()
+dumpTable_gFarm()
+dumpTable_gAnimal()
+
+print ("")
+print ("Print information about chickens in County B")
+print ("")
+animalTypeToPrint = "Chicken"
+countyNameToPrint = "County B"
+# For all animals
+for (animalIndex, animalType) in enumerate(gAnimal_Type):
+    if animalType == animalTypeToPrint:
+        # If correct animal type get intermediate farm and county indices
+        farmIndex = gAnimal_gFarm_Index[animalIndex]
+        countyIndex = gFarm_gCounty_Index[farmIndex]
+        # If right county print all information
+        if gCounty_Name[countyIndex] == countyNameToPrint:
+            print (gCounty_Name[countyIndex],  gFarm_Name[farmIndex], gAnimal_Name[animalIndex])
+print ("")
+
