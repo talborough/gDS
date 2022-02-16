@@ -234,7 +234,7 @@ def generateDumpCode():
 # Get the datastore definition file name prefix
 datastoreNamePrefix = sys.argv[1]
 
-# Read in the entire datastore file
+# Read in the entire datastore definition file
 LinesToCompile = open(datastoreNamePrefix + ".dd", "r").read().splitlines()
 
 # Verify the table definition start/end keywords match up and make sense
@@ -246,9 +246,9 @@ generateVariableDefinitions()
 # Generate code to add a table row when called
 generateRowAddCode()
 
-# Generate code to dump print each table's rows when called
+# Generate code to print/dump each table's rows when called
 generateDumpCode()
 
-# Write out the include file "xxx".py
+# Write out the Python file <file name>.py
 open(f"{datastoreNamePrefix}.py", "w").write(CompiledText)
 print (f"Successfully wrote file {datastoreNamePrefix}.py")
