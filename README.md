@@ -1,6 +1,6 @@
 # gDS
 
-(Python) Global Data Store (gDS) - An lightweight data store (for building test platforms in Python among other things)
+(Python) Global Data Store (gDS) - A lightweight data store (for building test platforms in Python among other things)
 
 gDS may not be for you:
 
