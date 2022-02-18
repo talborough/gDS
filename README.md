@@ -17,11 +17,15 @@ get a "large" job done gDS may be for you. gDS was developed to help manage an e
 independent activities (processes and threads) running against a VMware installation with hundreds of bare-metal hosts and thousands 
 of VMs. gDS was used to keep all the run-time activities heading in the same direction.
 
-gDS uses Python shared-memory "list" and "dict" objects (created by the native "multiprocessing" library) to synthesize global 
+gDS uses Python shared-memory "list" and "dict" objects (created by the Python "multiprocessing" library) to synthesize global 
 run-time tables. An easy-to-use naming convention and notation (once you get used to it) makes it very plain what data is being 
 manipulated and the notation remains consistent whether multi-processing, multi-threading or both. Any change in the data by one 
 process/thread is instantly reflected in all cooperating processes/threads. The tables are defined by a data-definition file which 
-is compiled by the "gDSCompiler" into a Python file, and then consumed by the code using the gDS.
+is compiled by the "gDSCompiler" into a Python file, and then consumed by the code using the data store.
+
+Note that even though the manipulation of the data is done with ordinary Python code, the data store itself can still be organized in a
+relational way. Indeed, if the data store is relationally organized it is often easier to work with and, the reverse is sometimes true: if
+the data is hard to work with it may well be because it is not relationally organized.
 
 Example files
 =============
