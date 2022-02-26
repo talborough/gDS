@@ -1,5 +1,5 @@
 #
-# The data defiinition file for the animalFarm_01 sample program.
+# The data definition file for the animalFarm_01 sample program.
 #
 # To complie:
 #
@@ -8,14 +8,14 @@
 # gCounty - The county a farm is in
 #
 defineTable     gCounty                 MasterLock              # Table definition; the routine to lock access to the table
-defineColumn    gCounty_Name            None                    # The county name
+defineColumn    gCounty_Name            None                    # The county's name
 defineIndex     gCounty_Name2Index                              # A dictionary to look up county index by name
 endTable
 #
 # gFarm - The farms
 #
 defineTable     gFarm                   MasterLock              # Table definition
-defineColumn    gFarm_Name              None                    # Farm name
+defineColumn    gFarm_Name              None                    # Farm's name
 defineColumn    gFarm_gCounty_Index     None                    # The county a farm is in
 endTable
 #
