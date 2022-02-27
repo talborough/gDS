@@ -1,9 +1,9 @@
 #
 # The data definition file for the animalFarm_01 sample program.
 #
-# To complie:
+# To generate code:
 #
-#       ./gDSCompile animalFarm_01
+#       ./gDSCodeGen animalFarm_01
 #
 # gCounty - The county a farm is in
 #
@@ -15,7 +15,7 @@ endTable
 # gFarm - The farms
 #
 defineTable     gFarm                   MasterLock              # Table definition
-defineColumn    gFarm_Name              None                    # Farm's name
+defineColumn    gFarm_Name              None                    # The farm's name
 defineColumn    gFarm_gCounty_Index     None                    # The county a farm is in
 endTable
 #
