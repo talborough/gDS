@@ -59,14 +59,14 @@ def verifyTableSpecs():
         if primaryKeyword == "defineTable":
             # If out of sequence
             if currentTableName is not None:
-                print (f"'defineTable' found before previous table '{currentTableName}' ended at line {lineIndex + 1} in the input file")
+                print (f"'defineTable' found before previous table '{currentTableName}' ended at line {lineIndex} in the input file")
                 exit (1)
             # If arg1 (locker name) missing
             if arg1 is None:
-                print (f"'defineTable' missing lock routine name at line {lineIndex + 1} in the input file")
+                print (f"'defineTable' missing lock routine name at line {lineIndex} in the input file")
                 exit (1)
             if arg2 is not None:
-                print (f"'defineTable' has extra argument at line {lineIndex + 1} in the input file")
+                print (f"'defineTable' has extra argument at line {lineIndex} in the input file")
                 exit (1)
                 
             # Set up to handle a new table definition
@@ -75,13 +75,13 @@ def verifyTableSpecs():
             
         elif primaryKeyword == "endTable":
             if currentTableName is None:
-                print (f"'endTable' found before 'defineTable' at line {lineIndex + 1} in the input file")
+                print (f"'endTable' found before 'defineTable' at line {lineIndex} in the input file")
                 exit (1)
             if not nameColumnSeen:
-                print (f"No '_Name' column was defined for table {currentTableName} at line {lineIndex + 1} in the input file")
+                print (f"No '_Name' column was defined for table {currentTableName} at line {lineIndex} in the input file")
                 exit (1)
             if elementName is not None:
-                print (f"'endTable' has extra argument(s) at line {lineIndex + 1} in the input file")
+                print (f"'endTable' has extra argument(s) at line {lineIndex} in the input file")
                 exit (1)
                 
             currentTableName = None
@@ -89,37 +89,43 @@ def verifyTableSpecs():
             
         elif primaryKeyword == "defineColumn":
             if currentTableName is None:
-                print (f"'defineColumn' command found outside of 'beginTable' block at line {lineIndex + 1} in the input file")
+                print (f"'defineColumn' command found outside of 'beginTable' block at line {lineIndex} in the input file")
                 exit (1)
             if elementName is None:
-                print (f"'defineColumn' command missing element name at line {lineIndex + 1} in the input file")
+                print (f"'defineColumn' command missing element name at line {lineIndex} in the input file")
+                exit (1)
+            if not elementName.startswith(f"{currentTableName}_"):
+                print (f"'defineColumn' command does not start with table name at line {lineIndex} in the input file")
                 exit (1)
             if arg1 is None:
-                print (f"'defineColumn' command missing initial value at line {lineIndex + 1} in the input file")
+                print (f"'defineColumn' command missing initial value at line {lineIndex} in the input file")
                 exit (1)
             if arg2 is not None:
-                print (f"'defineColumn' command has extra arguments at line {lineIndex + 1} in the input file")
+                print (f"'defineColumn' command has extra arguments at line {lineIndex} in the input file")
                 exit (1)
             if elementName == f"{currentTableName}_Name":
                 nameColumnSeen = True
                 
         elif primaryKeyword == "defineIndex":
             if currentTableName is None:
-                print (f"'defineIndex' command found outside of 'beginTable' block at line {lineIndex + 1} in the input file")
+                print (f"'defineIndex' command found outside of 'beginTable' block at line {lineIndex} in the input file")
                 exit (1)
             if elementName is None:
-                print (f"'defineIndex' command missing element name at line {lineIndex + 1} in the input file")
+                print (f"'defineIndex' command missing element name at line {lineIndex} in the input file")
+                exit (1)
+            if not elementName.startswith(f"{currentTableName}_"):
+                print (f"'defineColumn' command does not start with table name at line {lineIndex} in the input file")
                 exit (1)
             if arg1 is not None:
-                print (f"'defineIndex' command has extra arguments at line {lineIndex + 1} in the input file")
+                print (f"'defineIndex' command has extra arguments at line {lineIndex} in the input file")
                 exit (1)
                 
         else:
-            print (f"Unknown primary keyword '{primaryKeyword}' found at line {lineIndex + 1} in the input file")
+            print (f"Unknown primary keyword '{primaryKeyword}' found at line {lineIndex} in the input file")
             exit (1)
             
     if currentTableName is not None:
-        print (f"Missing 'endTable' for table '{currentTableName}' at line {lineIndex + 1} in the input file")
+        print (f"Missing 'endTable' for table '{currentTableName}' at line {lineIndex} in the input file")
         exit (1)
             
 
@@ -166,7 +172,7 @@ def generateVariableDefinitions():
             GeneratedCode += f"{currentTableName}_RowStatus = gDSMgr.list() \n"
             
         else:
-            print (f"Unknown primary keyword '{primaryKeyword}' at line {lineIndex + 1} - debug abort)")
+            print (f"Unknown primary keyword '{primaryKeyword}' at line {lineIndex} - debug abort)")
             x = 1/0
 
 
@@ -186,13 +192,13 @@ def generateRowAddCode():
         (lineIndex, primaryKeyword, elementName, var1, dummy) = getNextLineToProcess(lineIndex)
         
         if primaryKeyword == "defineTable":
+            currentTableName = elementName
+            currentLockerName = var1
             GeneratedCode += f"\n"
             GeneratedCode += f"# \n"
             GeneratedCode += f"# Add a row to table {elementName} under lock (if one was given) \n"
             GeneratedCode += f"# \n"
-            GeneratedCode += f"def addRow_{elementName}(rowStatus): \n"
-            currentTableName = elementName
-            currentLockerName = var1
+            GeneratedCode += f"def addARow_{currentTableName}(rowStatus): \n"
             if currentLockerName is not None:
                 GeneratedCode += f"    {currentLockerName}('lock') \n"
                 
@@ -213,14 +219,14 @@ def generateRowAddCode():
             currentLockerName = None
             
         else:
-            print (f"Unknown primary keyword '{primaryKeyword}' at line {lineIndex + 1} - debug abort)")
+            print (f"Unknown primary keyword '{primaryKeyword}' at line {lineIndex} - debug abort)")
             x = 1/0
             
 
 #
 # Generate code to print out the rows in each table for debug
 #
-def generateDumpCode():
+def generateTableDumpCode():
 
     global GeneratedCode
 
@@ -283,7 +289,7 @@ def generateDumpCode():
             currentLockerName = None
             
         else:
-            print (f"Unknown primary keyword '{primaryKeyword}' at line {lineIndex + 1} - debug abort)")
+            print (f"Unknown primary keyword '{primaryKeyword}' at line {lineIndex} - debug abort)")
             x = 1/0
             
 
@@ -309,7 +315,7 @@ generateVariableDefinitions()
 generateRowAddCode()
 
 # Generate code to print/dump each table's rows when called
-generateDumpCode()
+generateTableDumpCode()
 
 # Write out the Python file <file name>.py
 open(f"{datastoreNamePrefix}.py", "w").write(GeneratedCode)

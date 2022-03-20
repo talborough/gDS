@@ -19,7 +19,7 @@ defineColumn    gFarm_Name              None                    # The farm's nam
 defineColumn    gFarm_gCounty_Index     None                    # The county a farm is in
 endTable
 #
-# The animals on a farm
+# gAnimal - The animals on a farm
 #
 defineTable     gAnimal                 MasterLock              # Table definition
 defineColumn    gAnimal_gFarm_Index     None                    # The farm owning the animal
