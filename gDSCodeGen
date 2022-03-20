@@ -156,11 +156,11 @@ def generateVariableDefinitions():
         (lineIndex, primaryKeyword, elementName, dummy, dummy) = getNextLineToProcess(lineIndex)
         
         if primaryKeyword == "defineTable":
+            currentTableName = elementName
             GeneratedCode += f" \n"
             GeneratedCode += f"# \n"
-            GeneratedCode += f"# Define global shared variables for table {elementName} \n"
+            GeneratedCode += f"# Define global shared variables for table {currentTableName} \n"
             GeneratedCode += f"# \n"
-            currentTableName = elementName
             
         elif primaryKeyword == "defineColumn":
             GeneratedCode += f"{elementName} = gDSMgr.list() \n"
