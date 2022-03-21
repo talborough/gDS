@@ -54,3 +54,5 @@ To run the example executable file "animalFarm_01":
     * Execute the example file (see the file - it performs some very simple operations):
         
             ./animalFarm_01
+
+Comments welcome to Tom.Alborough@Gmail.com
