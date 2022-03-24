@@ -433,7 +433,7 @@ def generateTableDumpCode():
                 if currentLockerName is not None:
                     GeneratedCode += f"# under lock {currentLockerName} \n"
                 GeneratedCode += f"# \n"
-                GeneratedCode += f"def dumpTable_{currentTableName}(rangeListToDump = None): \n"
+                GeneratedCode += f"def {currentTableName}_DumpTable(rangeListToDump = None): \n"
                 
                 headerGenerated = False
                 

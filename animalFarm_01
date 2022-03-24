@@ -91,9 +91,9 @@ if __name__ == "__main__":
     time.sleep(3)
 
     # Dump all the tables
-    dumpTable_gCounty()
-    dumpTable_gFarm()
-    dumpTable_gAnimal()
+    gCounty_DumpTable()
+    gFarm_DumpTable()
+    gAnimal_DumpTable()
 
     print ("")
     print ("Print information about chickens in County B")
