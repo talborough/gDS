@@ -7,9 +7,11 @@
 #
 # gFarm - The farms
 #
+# Keyword       Item name               Default value if cited
+# =======       =========               ======================
 defineTable     gFarm                                           # Table definition
-defineColumn    gFarm_Name                 None                     # The farm's name
-defineColumn    gFarm_gCounty_Index        None                     # The county a farm is in
+defineColumn    gFarm_Name                                      # The farm's name
+defineColumn    gFarm_gCounty_Index     None                    # The county a farm is in / default value
 endTable
 #
 # gCounty - The county a farm is in
@@ -21,9 +23,11 @@ endTable
 #
 # gAnimal - The animals on a farm
 #
-defineTable     gAnimal                 MasterLock              # Table definition
+# Keyword       Item name               Row lock if cited
+# =======       =========               =================
+defineTable     gAnimal                 MasterLock              # Table definition / row lock
 defineColumn    gAnimal_gFarm_Index                             # The farm owning the animal
-defineColumn    gAnimal_Type            None                        # The kind of animal
+defineColumn    gAnimal_Type                                    # The kind of animal
 defineColumn    gAnimal_Name                                    # The animal's name
 defineColumn    gAnimal_RowStatus                               # This  table has concurrency control
 endTable
