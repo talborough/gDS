@@ -1,0 +1,28 @@
+#
+# A test data definition file...
+#
+# gCounty - The county a farm is in
+#
+defineTable     gCounty                                         # Table definition; the routine to lock access to the table
+defineColumn    gCounty_Name            None                    # The county's name
+defineIndex     gCounty_Name2Index                              # A dictionary to look up county index by name
+endTable
+#
+# gFarm - The farms
+#
+defineTable     gFarm                   MasterLock              # Table definition
+defineColumn    gFarm_Name              None                    # The farm's name
+defineColumn    gFarm_gCounty_Index     None                    # The county a farm is in
+defineColumn    gFarm_RowStatus         None                    # A necessary column
+endTable
+#
+# gAnimal - The animals on a farm
+#
+defineTable     gAnimal                 MasterLock              # Table definition
+defineColumn    gAnimal_gFarm_Index     None                    # The farm owning the animal
+defineColumn    gAnimal_Type            None                    # The kind of animal
+defineColumn    gAnimal_Name            None                    # The animal's name
+defineColumn    gAnimal_RowStatus       ""
+endTable
+#
+#

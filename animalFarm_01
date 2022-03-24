@@ -29,92 +29,86 @@ def addOneAnimal (farmIndex, animalType, animalNumber):
     # Called by each process, this gets them all running at random times over a 2 to 8 second interval
     time.sleep(random.uniform(2.0, 8.0))
     
-    # Add the animal as the "next" one
-    animalIndex = addARow_gAnimal(None)
-    gAnimal_Type[animalIndex] = animalType
-    gAnimal_Name[animalIndex] = f"{animalType} #{animalNumber}"
-    gAnimal_gFarm_Index[animalIndex] = farmIndex
+    # Add this animal as the "next" one
+    animalIndex = gAnimal_AddARowUnderLock(_Type = animalType, _Name = f"{animalType} #{animalNumber}", \
+                                           _gFarm_Index = farmIndex, _RowStatus = "")
     
     print (f"Added a {animalType} to {gFarm_Name[farmIndex]}")
 
 ##################
-# Main - Start by creating the counties and farms statically in the mainline code
+# Main - Start by creating the counties and farms statically in mainline code
 ##################
-countyIndexA = addARow_gCounty(None)
-gCounty_Name[countyIndexA] = "County A"
-gCounty_Name2Index["County A"] = countyIndexA
 
-countyIndexB = addARow_gCounty(None)
-gCounty_Name[countyIndexB] = "County B"
-gCounty_Name2Index["County B"] = countyIndexB
+if __name__ == "__main__":
 
-# County A has 1 farm and County B has 2 farms
-farmIndexA = addARow_gFarm(None)
-gFarm_Name[farmIndexA] = "Farm A"
-gFarm_gCounty_Index[farmIndexA] = countyIndexA
+    # Start with 2 counties
+    countyIndexA = gCounty_AddARow(_Name = "County A")
+    gCounty_Name2Index["County A"] = countyIndexA
 
-farmIndexB = addARow_gFarm(None)
-gFarm_Name[farmIndexB] = "Farm B"
-gFarm_gCounty_Index[farmIndexB] = countyIndexB
+    countyIndexB = gCounty_AddARow(_Name = "County B")
+    gCounty_Name2Index["County B"] = countyIndexB
 
-farmIndexC = addARow_gFarm(None)
-gFarm_Name[farmIndexC] = "Farm C"
-gFarm_gCounty_Index[farmIndexC] = countyIndexB
+    # County A has 1 farm and County B has 2 farms
+    farmIndexA = gFarm_AddARow(_Name = "Farm A", _gCounty_Index = countyIndexA)
 
-#
-# Add some animals using a bunch of random processes
-#
+    farmIndexB = gFarm_AddARow(_Name = "Farm B", _gCounty_Index = countyIndexB)
 
-processes = []
+    farmIndexC = gFarm_AddARow(_Name = "Farm C", _gCounty_Index = countyIndexB)
 
-for i in range(3):
-    processes.append(Process(target = addOneAnimal, args = (farmIndexA, "Cow", i+1)))
-    processes[-1].start()
-    processes.append(Process(target = addOneAnimal, args = (farmIndexB, "Cow", i+1)))
-    processes[-1].start()
-    processes.append(Process(target = addOneAnimal, args = (farmIndexC, "Cow", i+1)))
-    processes[-1].start()
-    
-for i in range(10):
-    processes.append(Process(target = addOneAnimal, args = (farmIndexA, "Chicken", i+1)))
-    processes[-1].start()
-    processes.append(Process(target = addOneAnimal, args = (farmIndexB, "Chicken", i+1)))
-    processes[-1].start()
-    processes.append(Process(target = addOneAnimal, args = (farmIndexC, "Chicken", i+1)))
-    processes[-1].start()
-    
-print ("")
-print (f"Started {len(processes)} processes...")
-print ("")
-    
-# Wait for all the propcesses to complete
-for aProcess in processes:
-    aProcess.join()
-    
-print ("")
-print ("Done with adding animals!")
-print ("")
-time.sleep(3)
+    #
+    # Add some animals using a bunch of random processes
+    #
 
-# Dump all the tables
-dumpTable_gCounty()
-dumpTable_gFarm()
-dumpTable_gAnimal()
+    processes = []
 
-print ("")
-print ("Print information about chickens in County B")
-print ("")
-animalTypeToPrint = "Chicken"
-countyNameToPrint = "County B"
+    for i in range(3):
+        processes.append(Process(target = addOneAnimal, args = (farmIndexA, "Cow", i+1)))
+        processes[-1].start()
+        processes.append(Process(target = addOneAnimal, args = (farmIndexB, "Cow", i+1)))
+        processes[-1].start()
+        processes.append(Process(target = addOneAnimal, args = (farmIndexC, "Cow", i+1)))
+        processes[-1].start()
+        
+    for i in range(10):
+        processes.append(Process(target = addOneAnimal, args = (farmIndexA, "Chicken", i+1)))
+        processes[-1].start()
+        processes.append(Process(target = addOneAnimal, args = (farmIndexB, "Chicken", i+1)))
+        processes[-1].start()
+        processes.append(Process(target = addOneAnimal, args = (farmIndexC, "Chicken", i+1)))
+        processes[-1].start()
+        
+    print ("")
+    print (f"Started {len(processes)} processes...")
+    print ("")
+        
+    # Wait for all the propcesses to complete
+    for aProcess in processes:
+        aProcess.join()
+        
+    print ("")
+    print ("Done with adding animals!")
+    print ("")
+    time.sleep(3)
 
-# For all animals
-for (animalIndex, animalType) in enumerate(gAnimal_Type):
-    if animalType == animalTypeToPrint:
-        # If correct animal type get farm and county indices
-        farmIndex = gAnimal_gFarm_Index[animalIndex]
-        countyIndex = gFarm_gCounty_Index[farmIndex]
-        # If right county print all information
-        if gCounty_Name[countyIndex] == countyNameToPrint:
-            print (gCounty_Name[countyIndex],  gFarm_Name[farmIndex], gAnimal_Name[animalIndex])
-print ("")
+    # Dump all the tables
+    dumpTable_gCounty()
+    dumpTable_gFarm()
+    dumpTable_gAnimal()
+
+    print ("")
+    print ("Print information about chickens in County B")
+    print ("")
+    animalTypeToPrint = "Chicken"
+    countyNameToPrint = "County B"
+
+    # For all animals
+    for (animalIndex, animalType) in enumerate(gAnimal_Type):
+        if animalType == animalTypeToPrint:
+            # If correct animal type get farm and county indices
+            farmIndex = gAnimal_gFarm_Index[animalIndex]
+            countyIndex = gFarm_gCounty_Index[farmIndex]
+            # If right county print all information
+            if gCounty_Name[countyIndex] == countyNameToPrint:
+                print (gCounty_Name[countyIndex],  gFarm_Name[farmIndex], gAnimal_Name[animalIndex])
+    print ("")
 

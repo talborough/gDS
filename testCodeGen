@@ -1,0 +1,50 @@
+#!/usr/bin/bash
+
+function runATest () {
+
+    fileToUse=$1
+    expected=$2
+    
+    echo ""
+    
+    out=$(./gDSCodeGen $fileToUse)
+
+    if [ "$out" == "$expected" ]; then
+    
+        echo "Testing with $fileToUse.dd ... Success: $out"
+
+    else    
+    
+        echo "Testing with $fileToUse.dd ... Failure"
+
+        echo "Expected: \"$expected\""
+        echo "Received: \"$out\""
+    
+        echo "Failure!!!"
+        echo "Failure!!!"
+        echo "Failure!!!"
+
+        exit
+    fi
+
+}
+
+runATest test_A00 "Successfully wrote file test_A00.py"
+
+runATest test_A01 "Keyword 'defineColumnx' not in vocabulary at line 15 in the input file"
+
+runATest test_B01 "'defineTable' found before previous table 'gCounty' ended at line 13 in the input file"
+runATest test_B02 "'endTable' found before 'defineTable' at line 10 in the input file"
+runATest test_B03 "Missing 'endTable' for table 'gAnimal' at line 27 in the input file"
+
+runATest test_C01 "'defineTable' defines a duplicate table name 'gFarm' at line 21 in the input file"
+runATest test_C02 "'Index column must be in format '<table>_<table>_Index' at line 22 in the input file"
+runATest test_C03 "'Index column refers to a non-existant table at line 22 in the input file"
+
+runATest test_D01 "'defineColumn/Index' element name doesn't start with table name at line 14 in the input file"
+
+runATest test_E01 "Table 'gFarm' doesn't have a Name column at line 17 in the input file"
+
+runATest test_F01 "Table 'gFarm' has a lock routine and doesn't have a RowStatus column last at line 17 in the input file"
+runATest test_F02 "Table 'gFarm' has a lock routine and doesn't have a RowStatus column last at line 17 in the input file"
+runATest test_F03 "Table 'gFarm' has no lock routine and has a RowStatus column at line 17 in the input file"
