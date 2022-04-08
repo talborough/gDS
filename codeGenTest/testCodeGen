@@ -7,7 +7,7 @@ function runATest () {
     
     echo ""
     
-    out=$(./gDSCodeGen $fileToUse)
+    out=$(../gDSCodeGen $fileToUse)
 
     if [ "$out" == "$expected" ]; then
     
