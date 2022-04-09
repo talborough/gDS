@@ -3,10 +3,9 @@
 #
 # gCounty - The county a farm is in
 #
-defineUnary     gTest                   "MyValue"              # A unary
-#
 defineTable     gCounty                                         # Table definition; the routine to lock access to the table
 defineColumn    gCounty_Name            None                    # The county's name
+defineUnary     bad
 defineIndex     gCounty_Name2Index                              # A dictionary to look up county index by name
 endTable
 #
@@ -25,6 +24,5 @@ defineColumn    gAnimal_gFarm_Index     None                    # The farm ownin
 defineColumn    gAnimal_Type            None                    # The kind of animal
 defineColumn    gAnimal_Name            None                    # The animal's name
 defineColumn    gAnimal_RowStatus       ""
-endTable
-#
+#endTable
 #

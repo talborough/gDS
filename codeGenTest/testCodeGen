@@ -7,7 +7,7 @@ function runATest () {
     
     echo ""
     
-    out=$(../gDSCodeGen $fileToUse)
+    out=$(./gDSCodeGen $fileToUse)
 
     if [ "$out" == "$expected" ]; then
     
@@ -36,6 +36,7 @@ runATest test_A01 "Keyword 'defineColumnx' not in vocabulary at line 15 in the i
 runATest test_B01 "'defineTable' found before previous table 'gCounty' ended at line 13 in the input file"
 runATest test_B02 "'endTable' found before 'defineTable' at line 10 in the input file"
 runATest test_B03 "Missing 'endTable' for table 'gAnimal' at line 27 in the input file"
+runATest test_B04 "'defineUnary' found inside table definition at line 8 in the input file"
 
 runATest test_C01 "'defineTable' defines a duplicate table name 'gFarm' at line 21 in the input file"
 runATest test_C02 "'Index column must be in format '<table>_<table>_Index' at line 22 in the input file"
