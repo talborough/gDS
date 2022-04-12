@@ -4,7 +4,7 @@ Global Data Store (gDS) - A lightweight data store (for building test platforms 
 
 gDS may not be for you:
 
-* If you need the ACID qualities of a DBMS gDS is not for you.
+* If you need the "ACID" qualities of a DBMS gDS is not for you.
     
 * If you need more space than a memory-resident data store can handle gDS is not for you.
 
@@ -28,11 +28,20 @@ if the data is hard to work with it may well be because it is not relationally o
 Example files
 =============
 
-* animalFarm_01 - This example is brutally simple. It sets up a few counties and farms and then adds some animals from some spawned
-        processes. All the tables are then dumped out and a routine prints out a subset of  the animal collection.
+* animalFarm_01 - This example is brutally simple. It sets up a few counties and farms and then randomly adds some animals from some
+        spawned processes. All the tables are then dumped out and then a subset of the animal collection is printed out.
 
-* animalFarm_02 - This example is currently under construction. Its goal is to be descriptive and non-trivial (multi-processing 
-        and multi-threading). One large goal is to expose strategies for handling concurrent access.
+* animalFarm_02 - "V1" of this has been released. Follow the same rules to prepare, start and run it as for animalFarm_01 (below). The goals of animalFarm_02 are:
+
+    * Be able to demo the "test platform" functionality described in the Testing Complex Systems LinkedIn article.
+
+    * Be a descriptive and non-trivial (multi-processing and multi-threading) example of using gDS - one large goal is to expose strategies for handling concurrent access.
+
+For now:
+
+* Chunks of animalFarm_02 need to be re-organized.
+
+* Help is available at the end of the "animalFarm_02" file and at "./animalFarm_02 -h".
 
 Example animalFarm_01
 =====================
