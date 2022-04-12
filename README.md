@@ -2,6 +2,8 @@
 
 Global Data Store (gDS) - A lightweight data store (for building test platforms in Python among other things)
 
+(See the associated LinkedIn article: https://www.linkedin.com/pulse/testing-complex-systems-thomas-alborough)
+
 gDS may not be for you:
 
 * If you need the "ACID" qualities of a DBMS gDS is not for you.
