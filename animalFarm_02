@@ -3,10 +3,16 @@
 #
 # animalFarm_02 - A simulation to do 2 things:
 #
-#   -- Display how to build an interactive "test platform" that can be the core of a product's random
-#      load and stress test facility (see the LinkedIn article ????? for background.)
+#   -- Display how to build an interactive "test platform" that can serve as a product's random load
+#      and stress test facility.
 #
-#   -- Showcase the "global data store" (gDS) concept that can be at the center of a "test platform".
+#   -- Showcase the "global data store" (gDS) concept that can be at the center of the test platform.
+#
+# See the LinkedIn article:
+#
+#             https://www.linkedin.com/pulse/testing-complex-systems-thomas-alborough
+#
+# for more background.
 #    
 # There is help text at the bottom of this file for the user *or* (./animalFarm_02 --help)
 #
