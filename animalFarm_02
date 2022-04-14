@@ -3,12 +3,12 @@
 #
 # animalFarm_02 - A simulation to do 2 things:
 #
-#   -- Display how to build an interactive "test platform" that could be the core of a product's random
+#   -- Display how to build an interactive "test platform" that can be the core of a product's random
 #      load and stress test facility (see the LinkedIn article ????? for background.)
 #
-#   -- Showcase the "global data store" (gDS) concept that could be at the center of a "test platform".
+#   -- Showcase the "global data store" (gDS) concept that can be at the center of a "test platform".
 #    
-# There is help text at the bottom of this file for the user. (./animalFarm_02 --help)
+# There is help text at the bottom of this file for the user *or* (./animalFarm_02 --help)
 #
 # Note this is not an OO implementation despite the several "class" citations below. It was also written to
 # be able to demo the "test platform" functionality to a live person - it is being refactored to provide a
@@ -1045,7 +1045,11 @@ if __name__ == "__main__":
 animalFarm_02 (this file) is a part of the "gDS" capability / GitHub repo. gDS provides a very light-weight "data store" 
 feature to Python programs. See the repo README for more on gDS. This -help- covers how this example program works.
 
-This program serves 2 purposes (as described in LinkedIn article ?????):
+
+For more background see: "https://www.linkedin.com/pulse/testing-complex-systems-thomas-alborough"
+
+
+This program serves 2 purposes (as described in LinkedIn article):
 
     -- It demonstraits a use of gDS.
     
