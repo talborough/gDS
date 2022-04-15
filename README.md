@@ -1,8 +1,14 @@
-# gDS
+# gDS (V1)
 
 Global Data Store (gDS) - A lightweight data store (for building test platforms in Python among other things)
 
-See the associated LinkedIn article: https://www.linkedin.com/pulse/testing-complex-systems-thomas-alborough
+* See **repo.version** for version information.
+
+* See **V2** heading below for upcoming functionality
+
+* See the associated LinkedIn article: https://www.linkedin.com/pulse/testing-complex-systems-thomas-alborough
+
+* Comments welcome by Tom.Alborough@Gmail.com
 
 gDS may not be for you:
 
@@ -27,8 +33,7 @@ Note that even though the manipulation of the data is done with ordinary Python 
 relational way. Indeed, if the data store is relationally organized it is often easier to work with and, the reverse is sometimes true:
 if the data is hard to work with it may well be because it is not relationally organized.
 
-Example files
-=============
+## Example files
 
 * animalFarm_01 - This example is brutally simple. It sets up a few counties and farms and then randomly adds some animals from some
         spawned processes. All the tables are then dumped out and then a subset of the animal collection is printed out.
@@ -47,8 +52,7 @@ For now:
 
 * animalFarm_02 help documentation is available at the end of the "animalFarm_02" file and at "./animalFarm_02 -h".
 
-Example animalFarm_01
-=====================
+## Example animalFarm_01
 
 To run the example executable file "animalFarm_01":
 
@@ -68,4 +72,59 @@ To run the example executable file "animalFarm_01":
         
             ./animalFarm_01
 
-Comments welcome by Tom.Alborough@Gmail.com
+## Upcoming (V2) functionality
+
+* Reorganize animalFarm_02 top-level functions for improved user understanding.
+
+* Specify and support various .dd file capabilities.
+
+### .dd File Specifications and Operations
+
+Here's how the the various citations in the "define data" (.dd) files are handled. First, the major keywords / citations:
+
+* **defineTable** - The start of a table definition. One manditory argument - table name. One optional argument - Python lock function name (see example files for usage).
+
+* **defineColumn** - Define a table column. Onemanditory argument - column name. One optional argument - initial value.
+
+* **defineIndex** - Define an index for the table using the Name column value as the key. One manditory argument - index name.
+
+* **defineList / defineDict** - Define a global shared list / dictionary with no other semantics. One manditory argument - list/dict name.
+
+The reserved names in use here are:
+
+* **Name** - A column that identifies a row. May need to be a unique value (see below).
+
+* **RowStatus** - A column that specifies the status of a row (see below).
+
+* **Name2Index** - A dictionary with the row **Name** value as the key and the row's index as the value
+
+The per-table generated functions are:
+
+* **DumpTable** - Generated for all tables - uses the **Name** column if an index to another table needs to be resolved.
+
+* **AddARow / AddARowUnderLock** - Depending on whether the lock function name was specified  (and manage any **Name2Index**).
+
+* **CompressTableUnderLock** - Remove rows where **RowStatus** is None (and manage any **Name2Index**).
+
+Now, a more formal description of the above:
+
+```
+There must be a Name defineColumn citation in all tables (see below for the uniqueness requirement)
+
+If there is no lock function name specified in the defineTable citation:
+	The Name column values do not need to be unique
+	There must be no:
+		RowStatus column defined by a defineColumn citation
+		Name2Index column defined by a defineIndex citation
+	An AddARow function will be generated
+Else (lock function name is given in the defineTable citation)
+	There must be a RowStatus defineColumn citation
+		The RowStatus citatio must be the last column specified (this amplifies its atomicity to the user)
+		An AddARowUnderLock function will be generated
+		A CompressTableUnderLock function will be generated (if RowStatus is None the row is deleted from the table)
+	There may be a defineIndex citation
+		The Name column values must be unique (checked in AddARowUnderLock / duplicates cause program halt)
+		The Name2Index dictionary will be managed by the AddARowUnderLock and CompressTableUnderLock functions
+
+defineList & defineDictionary - Create the (un-initialized) variables / types as global shared.
+```
