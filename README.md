@@ -64,7 +64,7 @@ To run the example executable file "animalFarm_01":
         
             ./gDSCodeGen animalFarm_01
         
-* After the above operatione, the example program can be run:
+* After the above operation, the example program can be run:
 
     * Edit the first line of the example file ("animalFarm_01") to cite the installed version of python 3 to run
 
