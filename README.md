@@ -112,19 +112,19 @@ Now, a more formal description of the above:
 There must be a Name defineColumn citation in all tables (see below for the uniqueness requirement)
 
 If there is no lock function name specified in the defineTable citation:
-	The Name column values do not need to be unique
-	There must be no:
-		RowStatus column defined by a defineColumn citation
-		Name2Index column defined by a defineIndex citation
-	An AddARow function will be generated
+  The Name column values do not need to be unique
+    There must be no:
+      RowStatus column defined by a defineColumn citation
+      Name2Index column defined by a defineIndex citation
+      An AddARow function will be generated
 Else (lock function name is given in the defineTable citation)
-	There must be a RowStatus defineColumn citation
-		The RowStatus citatio must be the last column specified (this amplifies its atomicity to the user)
-		An AddARowUnderLock function will be generated
-		A CompressTableUnderLock function will be generated (if RowStatus is None the row is deleted from the table)
-	There may be a defineIndex citation
-		The Name column values must be unique (checked in AddARowUnderLock / duplicates cause program halt)
-		The Name2Index dictionary will be managed by the AddARowUnderLock and CompressTableUnderLock functions
+  There must be a RowStatus defineColumn citation
+    The RowStatus citatio must be the last column specified (this amplifies its atomicity to the user)
+    An AddARowUnderLock function will be generated
+    A CompressTableUnderLock function will be generated (if RowStatus is None the row is deleted from the table)
+  There may be a defineIndex citation
+    The Name column values must be unique (checked in AddARowUnderLock / duplicates cause program halt)
+    The Name2Index dictionary will be managed by the AddARowUnderLock and CompressTableUnderLock functions
 
 defineList & defineDictionary - Create the (un-initialized) variables / types as global shared.
 ```
