@@ -2,7 +2,7 @@
 
 Global Data Store (gDS) - A lightweight data store (for building test platforms in Python among other things)
 
-(See the associated LinkedIn article: https://www.linkedin.com/pulse/testing-complex-systems-thomas-alborough)
+See the associated LinkedIn article: https://www.linkedin.com/pulse/testing-complex-systems-thomas-alborough
 
 gDS may not be for you:
 
@@ -14,7 +14,7 @@ gDS may not be for you:
     
 * If you would rather not be concerned about data-locking issues (there are discussions on how to manage them below) gDS is not for you.
     
-(For anyone left..) If you need a core, controlling data store so you can multi-process in Python and consume multiple host CPUs to 
+(For anyone left..) If you need a core, controlling data store so you can multi-process in Python and consume multiple host cores to 
 get a "large" job done gDS may be for you.
 
 gDS uses Python shared-memory "list" and "dict" objects (created by the Python "multiprocessing" library) to synthesize global 
@@ -41,9 +41,11 @@ Example files
 
 For now:
 
-* Chunks of animalFarm_02 need to be re-organized.
+* Chunks of animalFarm_02 are being re-organized.
 
-* Help is available at the end of the "animalFarm_02" file and at "./animalFarm_02 -h".
+* The contents of the .dd files is being documented.
+
+* animalFarm_02 help documentation is available at the end of the "animalFarm_02" file and at "./animalFarm_02 -h".
 
 Example animalFarm_01
 =====================
@@ -66,4 +68,4 @@ To run the example executable file "animalFarm_01":
         
             ./animalFarm_01
 
-Comments welcome to Tom.Alborough@Gmail.com
+Comments welcome by Tom.Alborough@Gmail.com
