@@ -76,7 +76,9 @@ To run the example executable file "animalFarm_01":
 
 * Reorganize animalFarm_02 top-level functions for improved user understanding.
 
-* Specify and support various .dd file capabilities.
+* Revise gDSCodeGen for functionality and clarity.
+
+* Specify and support more .dd file functionality.
 
 ### .dd File Specifications and Operations
 
