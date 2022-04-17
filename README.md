@@ -1,10 +1,8 @@
-# gDS (V1)
+# gDS (V2)
 
 Global Data Store (gDS) - A lightweight data store (for building test platforms in Python among other things)
 
 * See **repo.version** for version information.
-
-* See **V2** heading below for upcoming functionality
 
 * See the associated LinkedIn article: https://www.linkedin.com/pulse/testing-complex-systems-thomas-alborough
 
@@ -38,21 +36,15 @@ if the data is hard to work with it may well be because it is not relationally o
 * animalFarm_01 - This example is brutally simple. It sets up a few counties and farms and then randomly adds some animals from some
         spawned processes. All the tables are then dumped out and then a subset of the animal collection is printed out.
 
-* animalFarm_02 - "V1" of this has been released. Follow the same rules to prepare, start and run it as for animalFarm_01 (below). The goals of animalFarm_02 are:
+* animalFarm_02 - "V2" of this has been released. Follow the same rules to prepare, start and run it as for animalFarm_01 (below). The goals of animalFarm_02 are:
 
-    * Be able to demo the "test platform" functionality described in the Testing Complex Systems LinkedIn article.
+    * Be able to demo some of the "test platform" functionality described in the Testing Complex Systems LinkedIn article.
 
     * Be a descriptive and non-trivial (multi-processing and multi-threading) example of using gDS - one large goal is to expose strategies for handling concurrent access.
 
-For now:
+    * animalFarm_02 help documentation is available at the end of the "animalFarm_02" file and at "./animalFarm_02 -h".
 
-* Chunks of animalFarm_02 are being re-organized.
-
-* The contents of the .dd files is being documented.
-
-* animalFarm_02 help documentation is available at the end of the "animalFarm_02" file and at "./animalFarm_02 -h".
-
-## Example animalFarm_01
+## Example animalFarm_01 (and animalFarm_02)
 
 To run the example executable file "animalFarm_01":
 
@@ -74,7 +66,7 @@ To run the example executable file "animalFarm_01":
 
 ## .dd File Specifications and Operation
 
-Here's how the the various citations in the "define data" (.dd) files are handled. First, the major keywords / citations:
+Here's how the the various citations in the "define data" (.dd) files are handled. First, the major keywords:
 
 * **defineTable** - The start of a table definition. One manditory argument - table name. One optional argument - Python lock function name (see example files for usage).
 
