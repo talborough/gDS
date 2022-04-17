@@ -148,9 +148,9 @@ def verifyNoDuplicateTableNamesOrBadRefs():
 
         if primaryKeyword is not None:
         
-            if primaryKeyword in ("defineTable", "defineList", "defineDict"):
+            if primaryKeyword in ("defineTable", "defineUnary", "defineList", "defineDict"):
                 if elementName in uniqueTableNames:
-                    print (f"{codeLine()}'defineTable' defines a duplicate table name '{elementName}' at line {lineIndex} in the input file")
+                    print (f"{codeLine()}Duplicate element name '{elementName}' defined at line {lineIndex} in the input file")
                     exit (1)
                 else:
                     uniqueTableNames.append(elementName)
@@ -321,6 +321,7 @@ def generateVariableDefinitions():
         if primaryKeyword is not None:
         
             initialValue = var1
+            
             if primaryKeyword in ("defineList", "defineDict"):
                 if initialValue is not None:
                     print (f"{codeLine()}'defineList/Dict' can not have an initial value at line {lineIndex} in the input file")
