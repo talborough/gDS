@@ -9,10 +9,10 @@
 #
 defineUnary     gStartTime              0                       # Overall start time
 defineUnary     gStopBackgroundProcs    True                    # Stop background procs
-defineUnary     gInteractive            True                    # Interactive or test run mode
+defineUnary     gMakeTestRun            False                   # Straight interactive mode or make a interactive "test run"
 defineUnary     gRunStopTime            0                       # Stop test run after this time
 defineUnary     gCycleStopTime          0                       # Stop test cycle after this time
-defineUnary     gBatch                  False                   # Make a run from the command line
+defineUnary     gCLIMode                False                   # Make a run from the command line
 #
 defineUnary     gTotalMilkCalculated    0                       # Overall counts for internal animalFarm_02 checking
 defineUnary     gTotalMilkObserved      0
@@ -46,5 +46,6 @@ defineColumn    gAnimal_gFarm_Index                             # The farm ownin
 defineColumn    gAnimal_Type                                    # The kind of animal
 defineColumn    gAnimal_Name            None                    # The animal's name
 defineColumn    gAnimal_Produced        0                       # Milk or eggs produced
+defineIndex     gAnimal_Name2Index                              # Play index
 defineColumn    gAnimal_RowStatus                               # For locking row
 endTable

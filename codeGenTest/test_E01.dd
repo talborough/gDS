@@ -5,7 +5,7 @@
 #
 defineTable     gCounty                                         # Table definition; the routine to lock access to the table
 defineColumn    gCounty_Name            None                    # The county's name
-defineIndex     gCounty_Name2Index                              # A dictionary to look up county index by name
+
 endTable
 #
 # gFarm - The farms

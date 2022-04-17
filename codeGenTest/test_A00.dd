@@ -7,13 +7,13 @@ defineUnary     gTest                   "MyValue"              # A unary
 #
 defineTable     gCounty                                         # Table definition; the routine to lock access to the table
 defineColumn    gCounty_Name            None                    # The county's name
-defineIndex     gCounty_Name2Index                              # A dictionary to look up county index by name
 endTable
 #
 # gFarm - The farms
 #
 defineTable     gFarm                   MasterLock              # Table definition
 defineColumn    gFarm_Name              None                    # The farm's name
+defineIndex     gFarm_Name2Index        
 defineColumn    gFarm_gCounty_Index     None                    # The county a farm is in
 defineColumn    gFarm_RowStatus         None                    # A necessary column
 endTable

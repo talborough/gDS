@@ -42,10 +42,10 @@ def addOneAnimal (farmIndex, animalType, animalNumber):
 if __name__ == "__main__":
 
     # Start with 2 counties
-    countyIndexA = gCounty_AddARow(_Name = "County A")
+    countyIndexA = gCounty_AddARowUnderLock(_Name = "County A")
     gCounty_Name2Index["County A"] = countyIndexA
 
-    countyIndexB = gCounty_AddARow(_Name = "County B")
+    countyIndexB = gCounty_AddARowUnderLock(_Name = "County B")
     gCounty_Name2Index["County B"] = countyIndexB
 
     # County A has 1 farm and County B has 2 farms
