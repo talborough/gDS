@@ -132,5 +132,5 @@ Else (lock function name is given in the defineTable citation)
 
 defineUnary - Create a list with one element (element [0] will be None unless specified otherwise)
 
-defineList & defineDictionary - Create the (un-initialized) variables / types as global shared
+defineList & defineDict - Create the (un-initialized) variables / types as global shared
 ```
