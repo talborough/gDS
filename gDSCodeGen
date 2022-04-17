@@ -339,7 +339,7 @@ def generateVariableDefinitions():
             elif primaryKeyword == "defineUnary":
                 GeneratedCode += f" \n"
                 GeneratedCode += f"{elementName} = gDSMgr.list() \n"
-                GeneratedCode += f"{elementName}.append({var1}) \n"
+                GeneratedCode += f"{elementName}.append({initialValue}) \n"
                 
             elif primaryKeyword == "defineIndex":
                 GeneratedCode += f"{elementName} = gDSMgr.dict() \n"
@@ -624,10 +624,21 @@ def generateCompressTableCode():
                     # Get ready to copy the data back to the gDS columns
                     GeneratedCode += f"\n"
                     GeneratedCode += f"    for tableIndex in range(len(_RowStatus)): \n"
-                    GeneratedCode += f"\n"
                     
                     # And add code to copy temp arrays back to global columns
                     addCopyBackCode(lineIndex)
+
+                    if indexSeen:
+                
+                        # Update entries that remain in the index
+                        GeneratedCode += f"\n"
+                        GeneratedCode += f"    for tableIndex in range(len({currentTableName}_RowStatus)): \n"
+                        GeneratedCode += f"        {currentTableName}_Name2Index[{currentTableName}_Name[tableIndex]] = tableIndex \n"
+
+                    GeneratedCode += f"\n"
+                    GeneratedCode += f"    {currentLockerName}('unlock') \n"
+                    GeneratedCode += f"\n"
+                    GeneratedCode += f"    return \n"
 
             # Skip here because we did everything above
             elif primaryKeyword == "defineColumn":
@@ -637,19 +648,8 @@ def generateCompressTableCode():
                 pass
                 
             elif primaryKeyword == "endTable":
+                pass
             
-                if indexSeen:
-            
-                    # Update entries that remain in the index
-                    GeneratedCode += f"\n"
-                    GeneratedCode += f"    for tableIndex in range(len({currentTableName}_RowStatus)): \n"
-                    GeneratedCode += f"        {currentTableName}_Name2Index[{currentTableName}_Name[tableIndex]] = tableIndex \n"
-
-                GeneratedCode += f"\n"
-                GeneratedCode += f"    {currentLockerName}('unlock') \n"
-                GeneratedCode += f"\n"
-                GeneratedCode += f"    return \n"
-
 #
 # Generate code to print out the rows in each table for debug
 #

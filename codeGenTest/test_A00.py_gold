@@ -81,10 +81,6 @@ def gAnimal_AddARowUnderLock(\
     MasterLock('unlock') 
     return (thisIndex) 
 
-    None('unlock') 
-
-    return 
-
 # 
 # Delete erased rows in table gFarm (using locker = MasterLock) 
 # Note - this procedure must be written as is because of Python/multiprocessing issues! 
@@ -110,7 +106,6 @@ def gFarm_CompressTableUnderLock():
     del gFarm_RowStatus[:] 
 
     for tableIndex in range(len(_RowStatus)): 
-
         gFarm_Name.append(_Name[tableIndex]) 
         gFarm_gCounty_Index.append(_gCounty_Index[tableIndex]) 
         gFarm_RowStatus.append(_RowStatus[tableIndex]) 
@@ -148,7 +143,6 @@ def gAnimal_CompressTableUnderLock():
     del gAnimal_RowStatus[:] 
 
     for tableIndex in range(len(_RowStatus)): 
-
         gAnimal_gFarm_Index.append(_gFarm_Index[tableIndex]) 
         gAnimal_Type.append(_Type[tableIndex]) 
         gAnimal_Name.append(_Name[tableIndex]) 

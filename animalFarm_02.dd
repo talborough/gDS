@@ -41,7 +41,7 @@ endTable
 #
 # The animals on a farm
 #
-defineTable     gAnimal                 MasterLock   compress   # Table definition
+defineTable     gAnimal                 MasterLock              # Table definition
 defineColumn    gAnimal_gFarm_Index                             # The farm owning the animal
 defineColumn    gAnimal_Type                                    # The kind of animal
 defineColumn    gAnimal_Name            None                    # The animal's name

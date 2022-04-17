@@ -19,7 +19,7 @@ endTable
 defineTable     gCounty                 MasterLock              # Table definition
 defineColumn    gCounty_Name                                    # The county's name
 defineIndex     gCounty_Name2Index                              # A dictionary to look up county index by name
-defineColumn    gCounty_RowStatus       ""                      # For concurrency control but - not used
+defineColumn    gCounty_RowStatus       None                      # For concurrency control but - not used
 endTable
 #
 # gAnimal - The animals on a farm
@@ -30,5 +30,5 @@ defineTable     gAnimal                 MasterLock              # Table definiti
 defineColumn    gAnimal_gFarm_Index                             # The farm owning the animal
 defineColumn    gAnimal_Type                                    # The kind of animal
 defineColumn    gAnimal_Name                                    # The animal's name
-defineColumn    gAnimal_RowStatus                               # This table has concurrency control
+defineColumn    gAnimal_RowStatus       None                    # This table has concurrency control
 endTable
