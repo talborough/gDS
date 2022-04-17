@@ -86,11 +86,13 @@ Here's how the the various citations in the "define data" (.dd) files are handle
 
 * **defineTable** - The start of a table definition. One manditory argument - table name. One optional argument - Python lock function name (see example files for usage).
 
-* **defineColumn** - Define a table column. Onemanditory argument - column name. One optional argument - initial value.
+* **defineColumn** - Define a table column. One manditory argument - column name. One optional argument - initial value.
 
 * **defineIndex** - Define an index for the table using the Name column value as the key. One manditory argument - index name.
 
-* **defineList / defineDict** - Define a global shared list / dictionary with no other semantics. One manditory argument - list/dict name.
+* **defineUnary** - Define a (list) with one element to use as a flag/counter. One manditory argument - element name. One optional argument - initial value.
+
+* **defineList / defineDict** - Define a global shared list / dictionary with no other semantics. One manditory argument - list/dict name. A way to create completely ad-hoc global shared variables.
 
 The reserved names in use here are:
 
@@ -104,11 +106,11 @@ The per-table generated functions are:
 
 * **DumpTable** - Generated for all tables - uses the **Name** column if an index to another table needs to be resolved.
 
-* **AddARow / AddARowUnderLock** - Depending on whether the lock function name was specified  (and manage any **Name2Index**).
+* **AddARow / AddARowUnderLock** - Depending on whether the lock function name was specified  (and manage any **Name2Index** index).
 
-* **CompressTableUnderLock** - Remove rows where **RowStatus** is None (and manage any **Name2Index**).
+* **CompressTableUnderLock** - Remove rows where **RowStatus** is **None** (and manage any **Name2Index** index).
 
-Now, a more formal description of the above:
+Now, a different view of the above:
 
 ```
 There must be a Name defineColumn citation in all tables (see below for the uniqueness requirement)
@@ -128,5 +130,7 @@ Else (lock function name is given in the defineTable citation)
     The Name column values must be unique (checked in AddARowUnderLock / duplicates cause program halt)
     The Name2Index dictionary will be managed by the AddARowUnderLock and CompressTableUnderLock functions
 
-defineList & defineDictionary - Create the (un-initialized) variables / types as global shared.
+defineUnary - Create a list with one element (element [0] will be None unless specified otherwise)
+
+defineList & defineDictionary - Create the (un-initialized) variables / types as global shared
 ```
