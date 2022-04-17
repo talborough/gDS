@@ -72,15 +72,7 @@ To run the example executable file "animalFarm_01":
         
             ./animalFarm_01
 
-## Upcoming (V2) functionality
-
-* Reorganize animalFarm_02 top-level functions for improved user understanding.
-
-* Revise gDSCodeGen for functionality and clarity.
-
-* Specify and support more .dd file functionality.
-
-### .dd File Specifications and Operations
+## .dd File Specifications and Operation
 
 Here's how the the various citations in the "define data" (.dd) files are handled. First, the major keywords / citations:
 
@@ -108,7 +100,7 @@ The per-table generated functions are:
 
 * **AddARow / AddARowUnderLock** - Depending on whether the lock function name was specified  (and manage any **Name2Index** index).
 
-* **CompressTableUnderLock** - Remove rows where **RowStatus** is **None** (and manage any **Name2Index** index).
+* **CompressTableUnderLock** - Remove rows where **RowStatus** is **None** (and fix up any existing **Name2Index** index).
 
 Now, a different view of the above:
 
