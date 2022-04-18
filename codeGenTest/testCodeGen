@@ -43,7 +43,7 @@ runATest test_B03 "Missing 'endTable' for table 'gAnimal' at line 26 in the inpu
 runATest test_B04 "'defineList', 'defineDict' or 'defineUnary' found inside table definition at line 8 in the input file"
 runATest test_B05 "Found 'defineIndex' with no locker specified at line 8 in the input file"
 
-runATest test_C01 "'defineTable' defines a duplicate table name 'gFarm' at line 21 in the input file"
+runATest test_C01 "Duplicate element name 'gFarm' defined at line 21 in the input file"
 runATest test_C02 "'Index column must be in format '<table>_<table>_Index' at line 22 in the input file"
 runATest test_C03 "'Index column refers to a non-existant table at line 22 in the input file"
 
