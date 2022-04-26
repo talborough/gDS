@@ -16,7 +16,7 @@ gDS may not be for you:
 
 * If you need SQL or don't want to use the notation required to access the data, gDS is not for you.
     
-* If you would rather not be concerned about data-locking issues (there are discussions on how to manage them below) gDS is not for you.
+* If you would rather not be concerned about data-locking issues (there are discussions on how to manage them below and in the cited article) gDS is not for you.
     
 (For anyone left..) If you need a core, controlling data store so you can multi-process in Python and consume multiple host cores to 
 get a "large" job done gDS may be for you.
