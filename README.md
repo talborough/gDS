@@ -10,7 +10,7 @@ Global Data Store (gDS) - A lightweight data store (for building test platforms 
 
 gDS may not be for you:
 
-* If you need the "ACID" qualities of a DBMS gDS is not for you.
+* If you need all the "ACID" qualities of a DBMS gDS is not for you.
     
 * If you need more space than a memory-resident data store can handle gDS is not for you.
 
